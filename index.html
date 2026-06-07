@@ -632,48 +632,37 @@ img { display: block; max-width: 100%; }
 }
 
 /* =========================================================================
-   PROJECTS CAROUSEL
+   PROJECTS GRID
    ========================================================================= */
 .o-projects {
-  padding: 0 0 80px;
+  padding: 0 0 0;
   background: var(--ink-000);
-  overflow: hidden;
 }
-.o-projects .o-section__head {
-  padding: 24px 40px 36px;
-  margin: 0;
+.o-projects__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   border-top: 1.5px solid var(--ink-900);
+  border-left: 1.5px solid var(--ink-900);
 }
-.o-carousel-wrap { position: relative; }
-.o-carousel {
-  overflow: hidden;
-  cursor: grab;
-  user-select: none;
-  border-top: 1.5px solid var(--ink-900);
-  border-bottom: 1.5px solid var(--ink-900);
-}
-.o-carousel:active { cursor: grabbing; }
-.o-carousel__track {
-  display: flex;
-  gap: 0;
-  will-change: transform;
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-/* Cards */
 .o-card {
-  flex: 0 0 340px;
-  min-height: 380px;
   border-right: 1.5px solid var(--ink-900);
+  border-bottom: 1.5px solid var(--ink-900);
   padding: 28px 28px 24px;
+  min-height: 380px;
   display: flex; flex-direction: column; justify-content: space-between;
   text-decoration: none; color: inherit;
   background: var(--ink-000);
   position: relative; overflow: hidden;
-  transition: background var(--dur-2);
+  transition: background var(--dur-2), transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);
 }
-.o-card:hover { background: var(--ink-025); }
+.o-card:hover {
+  background: var(--ink-025);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 0 var(--ink-900);
+  z-index: 1;
+}
 .o-card--dark { background: var(--ink-900); color: var(--ink-000); }
-.o-card--dark:hover { background: var(--ink-700); }
+.o-card--dark:hover { background: var(--ink-700); box-shadow: 4px 4px 0 0 var(--mars-500); }
 .o-card__shader {
   position: absolute; inset: 0;
   background: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 1.2px) 0 0 / 12px 12px;
@@ -695,7 +684,8 @@ img { display: block; max-width: 100%; }
 }
 .o-card__title {
   font-family: var(--font-display); font-weight: 300;
-  font-size: 26px; letter-spacing: -0.03em; line-height: 1.05;
+  font-size: clamp(20px, 1.8vw, 28px);
+  letter-spacing: -0.03em; line-height: 1.05;
   margin: 0 0 10px;
 }
 .o-card__desc {
@@ -707,34 +697,17 @@ img { display: block; max-width: 100%; }
   position: relative; z-index: 1;
 }
 .o-card__arr {
-  font-family: var(--font-display); font-size: 26px; font-weight: 300;
+  font-family: var(--font-display); font-size: 24px; font-weight: 300;
   transition: transform var(--dur-2) var(--ease-spring);
 }
 .o-card:hover .o-card__arr { transform: translate(4px, -4px); }
-/* Controles */
-.o-carousel__controls {
-  display: flex; gap: 0;
-  position: absolute; bottom: -1px; right: 40px;
-}
-.o-carousel__btn {
-  font-family: var(--font-mono); font-size: 16px;
-  width: 48px; height: 48px;
-  border: 1.5px solid var(--ink-900); background: var(--ink-000);
-  color: var(--ink-900);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  transition: background var(--dur-2), color var(--dur-2);
-}
-.o-carousel__btn:hover { background: var(--ink-900); color: var(--ink-000); }
-.o-carousel__btn + .o-carousel__btn { border-left: none; }
 
-@media (max-width: 900px) {
-  .o-projects .o-section__head { padding: 24px 24px 28px; }
-  .o-card { flex: 0 0 280px; }
-  .o-carousel__controls { right: 24px; }
+@media (max-width: 1024px) {
+  .o-projects__grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 600px) {
-  .o-card { flex: 0 0 85vw; }
+  .o-projects__grid { grid-template-columns: 1fr; }
+  .o-projects [style*="padding: 24px 40px"] { padding: 24px 24px 0 !important; }
 }
 
 
@@ -873,106 +846,55 @@ img { display: block; max-width: 100%; }
   </div>
 </section>
 
-<section class="o-projects" id="work">
-  <div class="o-section__head" style="padding: 24px 40px 0; margin: 0;">
+<section class="o-projects" id="proyectos">
+  <div style="display:flex; justify-content:space-between; align-items:baseline; padding: 24px 40px 0; border-top: 1.5px solid var(--ink-900);">
     <div class="o-eyebrow">[ 04 / PROYECTOS ENTREGADOS — 2025—2026 ]</div>
     <div class="o-section__idx">004</div>
   </div>
+  <div class="o-projects__grid">
 
-  <div class="o-carousel-wrap">
-    <div class="o-carousel" id="carousel">
-      <!-- Track duplicado para loop infinito -->
-      <div class="o-carousel__track" id="carousel-track">
+    <a class="o-card o-card--dark" href="https://www.drdavidserranoandrade.com" target="_blank" rel="noopener">
+      <div class="o-card__shader"></div>
+      <div class="o-card__top"><span class="o-card__idx">01</span><span class="o-card__year">2026</span></div>
+      <div class="o-card__body">
+        <span class="o-card__sector">Cirugía Plástica</span>
+        <h3 class="o-card__title">Dr. David Serrano Andrade</h3>
+        <p class="o-card__desc">Cirujano plástico en Cuenca con presencia digital de primer nivel.</p>
+      </div>
+      <div class="o-card__foot"><span class="o-tag">Médico · Landing · SEO</span><span class="o-card__arr">→</span></div>
+    </a>
 
-        <a class="o-card" href="https://www.drdavidserranoandrade.com" target="_blank" rel="noopener">
-          <div class="o-card__top">
-            <span class="o-card__idx">01</span>
-            <span class="o-card__year">2026</span>
-          </div>
-          <div class="o-card__body">
-            <span class="o-card__sector">Cirugía Plástica</span>
-            <h3 class="o-card__title">Dr. David Serrano Andrade</h3>
-            <p class="o-card__desc">Cirujano plástico en Cuenca con presencia digital de primer nivel.</p>
-          </div>
-          <div class="o-card__foot">
-            <span class="o-tag">Médico · Landing · SEO</span>
-            <span class="o-card__arr">→</span>
-          </div>
-        </a>
+    <a class="o-card" href="https://www.drandresorl.online" target="_blank" rel="noopener">
+      <div class="o-card__top"><span class="o-card__idx">02</span><span class="o-card__year">2026</span></div>
+      <div class="o-card__body">
+        <span class="o-card__sector">ORL · Cirugía Facial</span>
+        <h3 class="o-card__title">Dr. Andrés ORL</h3>
+        <p class="o-card__desc">Especialista en otorrinolaringología. Citas directas desde el sitio.</p>
+      </div>
+      <div class="o-card__foot"><span class="o-tag">Médico · Landing · WhatsApp</span><span class="o-card__arr">→</span></div>
+    </a>
 
-        <a class="o-card o-card--dark" href="https://www.drandresorl.online" target="_blank" rel="noopener">
-          <div class="o-card__shader"></div>
-          <div class="o-card__top">
-            <span class="o-card__idx">02</span>
-            <span class="o-card__year">2026</span>
-          </div>
-          <div class="o-card__body">
-            <span class="o-card__sector">ORL · Cirugía Facial</span>
-            <h3 class="o-card__title">Dr. Andrés ORL</h3>
-            <p class="o-card__desc">Especialista en otorrinolaringología. Citas directas desde el sitio.</p>
-          </div>
-          <div class="o-card__foot">
-            <span class="o-tag">Médico · Landing · WhatsApp</span>
-            <span class="o-card__arr">→</span>
-          </div>
-        </a>
+    <a class="o-card o-card--dark" href="https://www.saraivargas.online" target="_blank" rel="noopener">
+      <div class="o-card__shader"></div>
+      <div class="o-card__top"><span class="o-card__idx">03</span><span class="o-card__year">2026</span></div>
+      <div class="o-card__body">
+        <span class="o-card__sector">Wellness · Marca</span>
+        <h3 class="o-card__title">Saraí Vargas</h3>
+        <p class="o-card__desc">Distribuidora de bienestar con identidad que comunica autoridad.</p>
+      </div>
+      <div class="o-card__foot"><span class="o-tag">Wellness · Marca · Landing</span><span class="o-card__arr">→</span></div>
+    </a>
 
-        <a class="o-card" href="https://www.saraivargas.online" target="_blank" rel="noopener">
-          <div class="o-card__top">
-            <span class="o-card__idx">03</span>
-            <span class="o-card__year">2026</span>
-          </div>
-          <div class="o-card__body">
-            <span class="o-card__sector">Wellness · Marca</span>
-            <h3 class="o-card__title">Saraí Vargas</h3>
-            <p class="o-card__desc">Distribuidora de bienestar con identidad que comunica autoridad.</p>
-          </div>
-          <div class="o-card__foot">
-            <span class="o-tag">Wellness · Marca · Landing</span>
-            <span class="o-card__arr">→</span>
-          </div>
-        </a>
+    <a class="o-card" href="https://guancavilcastreasure.vercel.app/" target="_blank" rel="noopener">
+      <div class="o-card__top"><span class="o-card__idx">04</span><span class="o-card__year">2026</span></div>
+      <div class="o-card__body">
+        <span class="o-card__sector">E-commerce · Marca</span>
+        <h3 class="o-card__title">Guancavilca's Treasure</h3>
+        <p class="o-card__desc">Cacao artesanal ecuatoriano con identidad de exportación.</p>
+      </div>
+      <div class="o-card__foot"><span class="o-tag">E-commerce · Branding · Producto</span><span class="o-card__arr">→</span></div>
+    </a>
 
-        <!-- Duplicado para loop continuo -->
-        <a class="o-card" href="https://www.drdavidserranoandrade.com" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-          <div class="o-card__top"><span class="o-card__idx">01</span><span class="o-card__year">2026</span></div>
-          <div class="o-card__body">
-            <span class="o-card__sector">Cirugía Plástica</span>
-            <h3 class="o-card__title">Dr. David Serrano Andrade</h3>
-            <p class="o-card__desc">Cirujano plástico en Cuenca con presencia digital de primer nivel.</p>
-          </div>
-          <div class="o-card__foot"><span class="o-tag">Médico · Landing · SEO</span><span class="o-card__arr">→</span></div>
-        </a>
-
-        <a class="o-card o-card--dark" href="https://www.drandresorl.online" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-          <div class="o-card__shader"></div>
-          <div class="o-card__top"><span class="o-card__idx">02</span><span class="o-card__year">2026</span></div>
-          <div class="o-card__body">
-            <span class="o-card__sector">ORL · Cirugía Facial</span>
-            <h3 class="o-card__title">Dr. Andrés ORL</h3>
-            <p class="o-card__desc">Especialista en otorrinolaringología. Citas directas desde el sitio.</p>
-          </div>
-          <div class="o-card__foot"><span class="o-tag">Médico · Landing · WhatsApp</span><span class="o-card__arr">→</span></div>
-        </a>
-
-        <a class="o-card" href="https://www.saraivargas.online" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-          <div class="o-card__top"><span class="o-card__idx">03</span><span class="o-card__year">2026</span></div>
-          <div class="o-card__body">
-            <span class="o-card__sector">Wellness · Marca</span>
-            <h3 class="o-card__title">Saraí Vargas</h3>
-            <p class="o-card__desc">Distribuidora de bienestar con identidad que comunica autoridad.</p>
-          </div>
-          <div class="o-card__foot"><span class="o-tag">Wellness · Marca · Landing</span><span class="o-card__arr">→</span></div>
-        </a>
-
-        </div><!-- /track -->
-    </div><!-- /carousel -->
-
-    <!-- Controles -->
-    <div class="o-carousel__controls">
-      <button class="o-carousel__btn" id="car-prev" aria-label="Anterior">←</button>
-      <button class="o-carousel__btn" id="car-next" aria-label="Siguiente">→</button>
-    </div>
   </div>
 </section>
 
@@ -1198,100 +1120,6 @@ const statsObserver = new IntersectionObserver((entries) => {
 const statsEl = document.querySelector('.o-stats');
 if (statsEl) statsObserver.observe(statsEl);
 
-// ─── Carrusel de proyectos ─────────────────────────────────
-(function() {
-  const track = document.getElementById('carousel-track');
-  if (!track) return;
-
-  const CARD_W = () => track.querySelector('.o-card').offsetWidth + 1.5; // +border
-  const TOTAL_REAL = 4; // cards reales (sin duplicados)
-  let pos = 0;
-  let auto;
-  let dragging = false, startX = 0, startPos = 0;
-
-  function setPos(x, animated) {
-    if (animated) {
-      track.style.transition = 'transform 0.5s cubic-bezier(0.22,1,0.36,1)';
-    } else {
-      track.style.transition = 'none';
-    }
-    track.style.transform = `translateX(${x}px)`;
-    pos = x;
-  }
-
-  function next() {
-    const w = CARD_W();
-    let newPos = pos - w;
-    setPos(newPos, true);
-    // Si llegamos a los duplicados, saltar sin animación
-    setTimeout(() => {
-      if (Math.abs(newPos) >= TOTAL_REAL * w) {
-        setPos(0, false);
-      }
-    }, 520);
-  }
-
-  function prev() {
-    const w = CARD_W();
-    if (pos >= 0) {
-      setPos(-(TOTAL_REAL * w), false);
-      requestAnimationFrame(() => {
-        setTimeout(() => setPos(pos + w, true), 20);
-      });
-    } else {
-      setPos(pos + w, true);
-    }
-  }
-
-  // Auto-loop cada 3s
-  function startAuto() { auto = setInterval(next, 3000); }
-  function stopAuto() { clearInterval(auto); }
-  startAuto();
-
-  document.getElementById('car-next').addEventListener('click', () => { stopAuto(); next(); startAuto(); });
-  document.getElementById('car-prev').addEventListener('click', () => { stopAuto(); prev(); startAuto(); });
-
-  // Drag / swipe
-  const carousel = document.getElementById('carousel');
-  carousel.addEventListener('mousedown', e => {
-    dragging = true; startX = e.clientX; startPos = pos;
-    stopAuto();
-  });
-  window.addEventListener('mousemove', e => {
-    if (!dragging) return;
-    const dx = e.clientX - startX;
-    track.style.transition = 'none';
-    track.style.transform = `translateX(${startPos + dx}px)`;
-  });
-  window.addEventListener('mouseup', e => {
-    if (!dragging) return;
-    dragging = false;
-    const dx = e.clientX - startX;
-    if (dx < -50) next();
-    else if (dx > 50) prev();
-    else setPos(pos, true);
-    startAuto();
-  });
-
-  // Touch
-  carousel.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX; startPos = pos; stopAuto();
-  }, { passive: true });
-  carousel.addEventListener('touchmove', e => {
-    const dx = e.touches[0].clientX - startX;
-    track.style.transition = 'none';
-    track.style.transform = `translateX(${startPos + dx}px)`;
-  }, { passive: true });
-  carousel.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - startX;
-    if (dx < -50) next(); else if (dx > 50) prev(); else setPos(startPos, true);
-    startAuto();
-  });
-
-  // Pausar al hover
-  carousel.addEventListener('mouseenter', stopAuto);
-  carousel.addEventListener('mouseleave', startAuto);
-})();
 
 </script>
 </body>
